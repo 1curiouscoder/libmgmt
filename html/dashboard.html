@@ -50,6 +50,10 @@ $(document).ready(function(){
 
          });
 
+        
+
+
+
 
        $("a#End").click(function(){
                
@@ -78,10 +82,20 @@ $(document).ready(function(){
 
     });   }); 
 
+
+//Jquery for the Search Tab
 $(document).ready(function(){
 $(".method2").click(function(){
 var val = $(this).text()
 $("button#srchbtn").text(val);
+
+if(val != "Accession Id" )
+{
+  $("#filter").css("visibility","");
+  $("#filter").click(function()
+  {$("#child-filter").css("visibility","");});
+}
+
 });
 });
           </script>
@@ -109,37 +123,66 @@ $("button#srchbtn").text(val);
         </div>
         <div class="tab-pane fade" id="search">
             <h4 class="mt-2">Search</h4>
-            <div class="input-group mb-3 float-center"  style="width:400px"> 
+            <div class="input-group mb-3 float-center"  style="width:600px"> 
   <input type="text" class="form-control" placeholder="Accession number" aria-label="Recipient's username" aria-describedby="basic-addon2" id="srchdata">
-  <div class="input-group-append">
+  <div class="input-group-append ">
     <div class="dropdown"> 
                 <button class="btn btn-primary dropdown-toggle" type="button" id="srchbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Search Method
                 </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item method2" href="#" id ="accnid" value="manual">Accession Id</a>
-                      <a class="dropdown-item method2" href="#" id="author" value="author">Author</a>
-                      <a class="dropdown-item method2" href="#" id ="title" value="manual">Title</a>
-                      <a class="dropdown-item method2" href="#" id="vol" value="import">Volume</a>
-                      <a class="dropdown-item method2" href="#" id ="publ" value="manual">Publisher</a>
-                      <a class="dropdown-item method2" href="#" id="yop" value="import">Year of Publication</a>
-                      <a class="dropdown-item method2" href="#" id ="pages" value="manual">Pages</a>
-                      <a class="dropdown-item method2" href="#" id="sourc" value="sourc">Source</a>
-                      <a class="dropdown-item method2" href="#" id ="clsno" value="manual">Class No.</a>
-                      <a class="dropdown-item method2" href="#" id="bkno" value="import">Book No.</a>
-                      <a class="dropdown-item method2" href="#" id ="cost" value="manual">Cost</a>
-                      <a class="dropdown-item method2" href="#" id="bill" value="import">Bill No.</a>
-                      <a class="dropdown-item method2" href="#" id ="widtdt" value="manual">Withdrawn date</a>
-                      <a class="dropdown-item method2" href="#" id="entrdt" value="import">Entry date</a>
-                      <a class="dropdown-item method2" href="#" id ="dcc" value="manual">DCC No.</a>
-                      <a class="dropdown-item method2" href="#" id="remrk" value="import">Remarks</a>
+                      <a class="dropdown-item method2" href="#" id ="accnid" >Accession Id</a>
+                      <a class="dropdown-item method2" href="#" id="author" >Author</a>
+                      <a class="dropdown-item method2" href="#" id ="title" >Title</a>
+                      <a class="dropdown-item method2" href="#" id="vol" >Volume</a>
+                      <a class="dropdown-item method2" href="#" id ="publ" >Publisher</a>
+                      <a class="dropdown-item method2" href="#" id="yop" >Year of Publication</a>
+                      <a class="dropdown-item method2" href="#" id ="pages" >Pages</a>
+                      <a class="dropdown-item method2" href="#" id="sourc" Source</a>
+                      <a class="dropdown-item method2" href="#" id ="clsno" >Class No.</a>
+                      <a class="dropdown-item method2" href="#" id="bkno" >Book No.</a>
+                      <a class="dropdown-item method2" href="#" id ="cost" >Cost</a>
+                      <a class="dropdown-item method2" href="#" id="bill" >Bill No.</a>
+                      <a class="dropdown-item method2" href="#" id ="widtdt" >Withdrawn date</a>
+                      <a class="dropdown-item method2" href="#" id="entrdt" >Entry date</a>
+                      <a class="dropdown-item method2" href="#" id ="dcc" >DCC No.</a>
+                      <a class="dropdown-item method2" href="#" id="remrk" >Remarks</a>
                     </div>
                  <div class="add float-right"></div>
         </div>
+        
+        <div style="padding-left: 2em;"><button class="btn btn-success" type="button" style="visibility:hidden;border-radius: 10px;height: 40px" id="filter" >Filters</button></div>
+        
   </div>
-            </div>
-             
+
+  <div id="child-filter" style="visibility:hidden;padding:2em">
+
+    <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="author">Author</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="title">Title</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="vol">Volume</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="publ">Publisher</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="yop">Year of publication</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="cost">Cost</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="widtdt">Withdrawn date</button>
+        <button class="btn btn-outline-secondary"   type="button" style="border-radius: 10px;margin:5px " id="entrdt">Entry date</button>
+        
+  
       </div>
+
+    <div> 
+       
+    <input type="text" class="form-control" id="author" placeholder="Author" style="visibility:hidden;">
+    <input type="text" class="form-control" id="title" placeholder="Title" style="visibility:hidden;">
+    <input type="text" class="form-control" id="vol" placeholder="Volume" style="visibility:hidden;">
+    <input type="text" class="form-control" id="publ" placeholder="Publisher" style="visibility:hidden;">
+    <input type="text" class="form-control" id="cost" placeholder="Cost" style="visibility:hidden;">
+    <input type="text" class="form-control" id="yop" placeholder="Year of publication" style="visibility:hidden;">
+    <input type="text" class="form-control" id="author" placeholder="Author" style="visibility:hidden;">
+    </div>
+
+   </div>
+             
+</div>
         <div class="tab-pane fade" id="Database">
             <h4 class="mt-2">&nbsp</h4>
             <ul id="myTab" class="nav nav-pills">
