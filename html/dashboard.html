@@ -86,46 +86,97 @@ $(document).ready(function(){
 //Jquery for the Search Tab
 $(document).ready(function(){
 $("a.method2").click(function(){
-var val = $(this).text()
-var obj = this;
-$("button#srchbtn").text(val);
+var val = $(this).text();
+var c=0;
+$("#srchdata").attr("placeholder",val);
+$("button#srchmthd").text(val);
 $("button#filter").css("visibility","hidden");
-$("div#child-filter").css("visibility","hidden");
-
-if(val != "Accession Id" ) // displays options when user selects accession id from dropdown
-{
+$("div#childfilter").css("visibility","hidden");
+$("#srchfrm input").css("visibility","hidden");
+if(val != "Accession Id" ) 
+// displays options when user selects accession id from dropdown
+  {
   $("button#filter").css("visibility","");
   }
 else
 {
   $("button#filter").css("visibility","hidden");
-  $("div#btnchildfilter").css("visibility","hidden");
+  $("#btnchildfilter").css("visibility","hidden");
 }      
         });
     });
 
 
 $(document).ready(function(){
+  var c=0; //used to check if the filters are hidden
 $("button#filter").click(function()
   {
-    if($("#btnchildfilter").css("visibility") != "hidden")
+    
+    $("#srchfrm input").css("visibility","hidden");
+    if($("div#childfilter").css("visibility") != "hidden")
     {     
-      $("#btnchildfilter").css("visibility","hidden");
+      $("div#childfilter").css("visibility","hidden");
+      $("button#btnchildfilter").css("visibility","hidden");
+      
     }
     else
     {
-      $("#btnchildfilter").css("visibility","");
-      //alert($("button#srchbtn").attr('id')+"childfilter");
-      alert();
-      //$("[value="+$('button#srchbtn').text().toLowerCase()+"]").css("visibility","hidden");
-    }
-
-    $("#btn-child-filter").click(function(){
-  alert($(this).attr('value'));
-        $("#srch-frm-" + $(this).attr('value')).css("visibility","");
-    });
+      $("div#childfilter").css("visibility","");
+      $("button#btnchildfilter").css("visibility","");
+      //alert($("button#srchmthd").attr('id')+"childfilter");
+      var chk = $('button#srchmthd').text().toLowerCase().replace(' ', '');
+      chk = chk.replace(" ","");
+      chk = chk.replace(".","");
+      $("[value="+chk+"]").css("visibility","hidden");
+       
+    }   
   });
+    
 });
+
+$(document).ready(function(){
+  $("button#btnchildfilter").click(function(){
+    
+        $("#srchfrm").css("visibility","");
+        var obj = "#srchfrm"+ $(this).attr("value");
+        //alert(obj);
+        if($(obj).css("visibility") == "hidden")
+        {
+          $(obj).css("visibility","");
+        }
+        else
+        {
+          $(obj).css("visibility","hidden");
+        }
+    });
+});
+
+$(document).ready(function(){
+    $("#srch").click(function(){
+              var srch =   $("#srchdata").val(); 
+              var srch1 =  $("#srchfrmauthor").val(); 
+              var srch2 =  $("#srchfrmtitle").val(); 
+              var srch3 =  $("#srchfrmvolume").val(); 
+              var srch4 =  $("#srchfrmpublisher").val(); 
+              var srch5 =  $("#srchfrmyearofpublication").val(); 
+              var srch6 =  $("#srchfrmcost").val(); 
+              var srch7 =  $("#srchfrmwithdrawndate").val(); 
+              var srch8 =  $("#srchfrmentrydate").val();
+              var qdata = [];
+              var srchtype = $("#srchdata").attr('placeholder');
+               $.post(
+                  "../query.php",
+                  {"query" : "search","srchtype" : srchtype,0 : srch,1 : srch1,2 : srch2,3: srch3,4: srch4,5: srch5,6: srch6,7: srch7,8: srch8},
+                  function(data) {
+                     //$("#Accn").attr("placeholder",data);
+                     alert(data);
+                  }
+               );            
+            });
+});
+
+
+
           </script>
 </head>
 <body>
@@ -150,15 +201,17 @@ $("button#filter").click(function()
             <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
         </div>
         <div class="tab-pane fade" id="search">
+          &nbsp
             <h4 class="mt-2">Search</h4>
-            <div class="input-group mb-3 float-center"  style="width:600px"> 
-  <input type="text" class="form-control" placeholder="Accession number" aria-label="Recipient's username" aria-describedby="basic-addon2" id="srchdata">
-  <div class="input-group-append ">
+            <div class="input-group mb-3 float-center" > 
+  <input type="text" class="form-control" placeholder="Accession number" aria-label="Recipient's username" aria-describedby="basic-addon2" id="srchdata"  style="width:600px">
+  <div class="input-group-append " >
     <div class="dropdown"> 
-                <button class="btn btn-primary dropdown-toggle" type="button" id="srchbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="srchmthd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Search Method
                 </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                       <a class="dropdown-item method2" href="#" id="dropaccnid" >Accession Id</a>
                       <a class="dropdown-item method2" href="#" id="dropauthor" >Author</a>
                       <a class="dropdown-item method2" href="#" id="droptitle" >Title</a>
@@ -176,38 +229,82 @@ $("button#filter").click(function()
                       <a class="dropdown-item method2" href="#" id="dropdcc" >DCC No.</a>
                       <a class="dropdown-item method2" href="#" id="dropremrk" >Remarks</a>
                     </div>
-                 <div class="add float-right"></div>
-        </div>
+          
+              <div class="float-right">
+
+                  <div style="padding-left:20px">
+                    <button class="btn btn-success" type="button" style="visibility:hidden;border-radius: 10px;" id="filter" >Filters</button>
+                    <button class="btn btn-success" id="srch"   type="button" style="border-radius:10px; ">Search</button>
+                  </div>
+          
+              </div>
         
-        <div style="padding-left: 2em;"><button class="btn btn-success" type="button" style="visibility:hidden;border-radius: 10px;height: 40px" id="filter" >Filters</button></div>
+        
+        </div>
+
         
   </div>
 
-  <div id="childfilter" style="padding:2em">
+  <div id="childfilter" style="visibility:hidden;padding:2em">
 
     <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="author">Author</button>
         <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="title">Title</button>
         <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="volume">Volume</button>
         <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="publisher">Publisher</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="year of publication">Year of publication</button>
+        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="yearofpublication">Year of publication</button>
         <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="cost">Cost</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="withdrawn date">Withdrawn date</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="entry date">Entry date</button>
+        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="withdrawndate">Withdrawn date</button>
+        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="entrydate">Entry date</button>
         
   
       </div>
+      <div class="container-fluid">
+  <div class="row">   
+  
+    <div id="srchfrm" class="form-group col-lg-3 col-md-3" style="visibility:hidden"> 
 
-    <div> 
-       
-    <input type="text" class="form-control" id="srchfrmauthor" placeholder="Author" style="visibility:hidden;">
-    <input type="text" class="form-control" id="srchfrmtitle" placeholder="Title" style="visibility:hidden;">
-    <input type="text" class="form-control" id="srchfrmvol" placeholder="Volume" style="visibility:hidden;">
-    <input type="text" class="form-control" id="srchfrmpubl" placeholder="Publisher" style="visibility:hidden;">
-    <input type="text" class="form-control" id="srchfrmcost" placeholder="Cost" style="visibility:hidden;">
-    <input type="text" class="form-control" id="srchfrmyop" placeholder="Year of publication" style="visibility:hidden;">
+           <h3>Filter values</h3>
+          <input type="text" class="form-control " id="srchfrmauthor" placeholder="Author" style="visibility:hidden;margin:5px;">
+          <input type="text" class="form-control " id="srchfrmtitle" placeholder="Title" style="visibility:hidden;margin:5px;">
+          <input type="text" class="form-control" id="srchfrmvolume" placeholder="Volume" style="visibility:hidden;margin:5px">
+          <input type="text" class="form-control" id="srchfrmpublisher" placeholder="Publisher" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmyearofpublication" placeholder="Year of publication" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmcost" placeholder="Cost" style="visibility:hidden;margin:5px">
+          <input type="date" class="form-control" id="srchfrmwithdrawndate" placeholder="Withdrawn date" style="visibility:hidden;margin:5px">
+          <input type="date" class="form-control" id="srchfrmentrydate" placeholder="Entry date" style="visibility:hidden;margin:5px">
+          
     </div>
 
+    <div id="srchtable" class="col-lg-9 col-md-9" style="visibility:hidden">
+      <h4>Search results</h4>&nbsp
+       <div class="table-responsive">
+            <table class="table">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Country</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Anna</td>
+                    <td>Pitt</td>
+                    <td>35</td>
+                    <td>New York</td>
+                    <td>USA</td>
+                  </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
 
+</div>
+</div>
    </div>
              
 </div>
@@ -286,7 +383,7 @@ $("button#filter").click(function()
               <h4 class="mt-2">Delete</h4>
               <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
           </div>
-        </div>
+        </di  v>
 
         </div>
         <div class="tab-pane fade" id="Access">
