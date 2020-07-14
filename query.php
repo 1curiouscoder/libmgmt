@@ -19,9 +19,10 @@ if(isset($data))
 		$c =0; //checks if a date attribute is used in both places
 		$index=NULL; // used to modify sql query with the given index attribute.
 		$arr = @$_POST['data'];
+		var_dump($_POST["srchdata"]);
 		$srchdata = checkpost($_POST["srchdata"]);
 		
-		if(isset($_POST["srchtype"]) && isset($srchdata) && !empty($srchdata))
+		if(isset($_POST["srchtype"]) && isset($srchdata) && !empty($srchdata) || $srchdata=="0")
 		{
 			$sql = "SELECT * FROM `books` WHERE ";
 				$srch = $_POST["srchtype"];
@@ -153,7 +154,15 @@ $sql = $sql." AND ".$querycreate[$i]."='".$arr[$i]."'";
 		{
 				while($row = mysqli_fetch_assoc($result))
 				{
-				echo   "	<tr><td>".$row['accessid']."</td>
+				echo   "	
+				
+		<tr>
+
+			<td><input type='checkbox' value='".$row['accessid']."' class='childupd' id = 'idchildupd'></td>
+
+			<td><input type='checkbox' value='".$row['accessid']."' class='childdel' id = 'idchilddel'></td>
+
+			<td>".$row['accessid']."</td>
 		
 			<td>".$row['author']."</td>
 		

@@ -12,7 +12,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-<link href="../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -56,85 +56,88 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
+    <script type="text/javascript">
+  $(document).ready(function(){
+  $(".asd").click(function()
+  {
+    alert("hello");
+  });
+});
+</script>
   </head>
   <body class="text-center">
  
+<form class="form-inline" id="opupd" >
+     <div class='form-row' style='padding-bottom:2em'>
+             <div class=' mx-sm-3 mb-2'>
+             <label for='Accn' id='label'>Accession no.</label>  
+             <input  type='text' class='prepend form-control' id='Accn' aria-describedby='emailHelp' value='".$row['accessid']."' >
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='author'>Author</label>
+             <input  type='text' class='prepend form-control' id='author' value='".$row['author']."'> </div>
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='title'>Title</label>   
+             <input  type='text' class='prepend form-control' id='title'> </div>
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='Volume'>Volume</label>
+             <input  type='text' class='prepend form-control' id='Volume'> </div>
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='publisher'>Publisher</label>    
+             <input  type='text' class='prepend form-control' id='publisher'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='yop'>year of Pub.</label>    
+             <input  type='text' class='prepend form-control' id='yop'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='pages'>Pages</label>    
+             <input  type='text' class='prepend form-control' id='pages'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='sourc'>Source</label>    
+             <input  type='text' class='prepend form-control' id='sourc'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='clsno'>Class No.</label>    
+             <input  type='text' class='prepend form-control' id='clsno'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='bookno'>Book no.</label>    
+             <input  type='text' class='prepend form-control' id='bookno'> </div>     
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='cost'>Cost</label>    
+             <input  type='text' class='prepend form-control' id='cost'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='billno'>Bill no.</label>    
+             <input  type='text' class='prepend form-control' id='billno'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='withd'>Withdrawn date</label>    
+             <input  type='date' class='prepend form-control' id='withd'> </div>       
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='entr'>Entry date</label>    
+             <input  type='date' class='prepend form-control' id='entr'> </div>       
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='ddc'>DDC no.</label>    
+             <input  type='text' class='prepend form-control' id='ddc'> </div>        
+             
+             <div class=' mx-sm-3 mb-2'>
+             <label for='remarks'>Remarks</label>    
+             <input  type='text' class='prepend form-control' id='remarks'> </div>
+      </div>
 
 
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th class="th-sm">Name
-
-      </th>
-      <th class="th-sm">Position
-
-      </th>
-      <th class="th-sm">Office
-
-      </th>
-      <th class="th-sm">Age
-
-      </th>
-      <th class="th-sm">Start date
-
-      </th>
-      <th class="th-sm">Salary
-
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tiger Nixon</td>
-      <td>System Architect</td>
-      <td>Edinburgh</td>
-      <td>61</td>
-      <td>2011/04/25</td>
-      <td>$320,800</td>
-    </tr>
-    <tr>
-      <td>Garrett Winters</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>63</td>
-      <td>2011/07/25</td>
-      <td>$170,750</td>
-    </tr>
-    <tr>
-      <td>Ashton Cox</td>
-      <td>Junior Technical Author</td>
-      <td>San Francisco</td>
-      <td>66</td>
-      <td>2009/01/12</td>
-      <td>$86,000</td>
-    </tr>
-    <tr>
-      <td>Cedric Kelly</td>
-      <td>Senior Javascript Developer</td>
-      <td>Edinburgh</td>
-      <td>22</td>
-      <td>2012/03/29</td>
-      <td>$433,060</td>
-    </tr>
-    </tbody>
-  <tfoot>
-    <tr>
-      <th>Name
-      </th>
-      <th>Position
-      </th>
-      <th>Office
-      </th>
-      <th>Age
-      </th>
-      <th>Start date
-      </th>
-      <th>Salary
-      </th>
-    </tr>
-  </tfoot>
-</table>
-
+  <div class="form-row">
+     <div class=' mx-sm-3 mb-2'><label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small></div>        <div class=' mx-sm-3 mb-2'><label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author"> </div>        <div class=' mx-sm-3 mb-2'><label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title"> </div>        <div class=' mx-sm-3 mb-2'><label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume"> </div>        <div class=' mx-sm-3 mb-2'><label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher"> </div>        <div class=' mx-sm-3 mb-2'><label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop"> </div>        <div class=' mx-sm-3 mb-2'><label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages"> </div>        <div class=' mx-sm-3 mb-2'><label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc"> </div>        <div class=' mx-sm-3 mb-2'><label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno"> </div>        <div class=' mx-sm-3 mb-2'><label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno"> </div>     <div class=' mx-sm-3 mb-2'><label for="cost">Cost</label>    <input  type="text" class="prepend form-control" id="cost"> </div>        <div class=' mx-sm-3 mb-2'><label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno"> </div>        <div class=' mx-sm-3 mb-2'><label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd"> </div>        <div class=' mx-sm-3 mb-2'><label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr"> </div>       <div class=' mx-sm-3 mb-2'><label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc"> </div>        <div class=' mx-sm-3 mb-2'><label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks"> </div>
+  </div>
+                </form>
 </body>
 </html>
