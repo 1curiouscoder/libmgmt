@@ -1,5 +1,4 @@
-
-+<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -28,6 +27,7 @@
             $(this).tab('show');
 
             $("#srchtable").css("visibility","hidden");
+            $("#dtBasicExample3").css("visibility","hidden");
         });
             
     });
@@ -599,6 +599,41 @@ $(document).ready(function(){
     </div>
           <div class="tab-pane fade" id="update">
               <h4 class="mt-2">Update</h4>
+              <div id="parentopupd2">
+                <form class="md-form"  method="post" enctype="multipart/form-data" id="frmupdUpload">
+
+                  <div class="input-group mb-3">  <div class="input-group-prepend">    <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Upload</button>  </div>  <div class="custom-file">    <input type="file" class="custom-file-input" id="inputFile2" aria-describedby="
+                    inputGroupFileAddon03">    <label class="custom-file-label" for="inputGroupFile03" id="cfile">Choose file</label>  </div>
+                </div>                                                                                                      </form>
+
+                  <table id="dtBasicExample3" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                  <thead>
+                            <tr>
+                                <th class="th-sm">Accession no.</th>
+                                <th class="th-sm">Author</th>
+                                <th class="th-sm">Title</th>
+                                <th class="th-sm">Volume</th>
+                                <th class="th-sm">Publisher</th>
+                                <th class="th-sm">Year of Pub.</th>
+                                <th class="th-sm">Pages</th>
+                                <th class="th-sm">Source</th>
+                                <th class="th-sm">Class no.</th>
+                                <th class="th-sm">Book no.</th>
+                                <th class="th-sm">Cost</th>
+                                <th class="th-sm">Bill no.</th>
+                                <th class="th-sm">Withdrawn date</th>
+                                <th class="th-sm">Entry date</th>
+                                <th class="th-sm">DDC No.</th>
+                                <th class="th-sm">Remarks</th>                                
+                              </tr>
+                  </thead>                               
+                                <tbody id="tbbody2">
+
+                                </tbody>
+          </table>  
+         
+
+               </div> 
               <div id="parentopupd" style="visibility: hidden;">
                <table  class="table table-striped table-bordered " cellspacing="0" width="100%">
                   <thead>

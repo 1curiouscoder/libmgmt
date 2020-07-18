@@ -1,21 +1,141 @@
 <?php
 require_once "connect.php";
+require_once "functions.php";
+
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
+
+
 $type = @$_POST['type'];
+$errorcheck = false;
 if($type=="update")
 {
 $arr = array("accessid","author","title","volume","publisher","yop",'pages',"source","classno","bookno","cost","billno","withdrawn","entrydate","DDCNO","remarks");
 foreach($_POST["data"] as $key) 
 	{
 	# code...
+		
 	$sql = "UPDATE books SET ";
-	for($i=0;$i<15;$i++) 
-		{
+	for($i=0;$i<16;$i++) 
+		{	$key[$i] = checkpost($key[$i]);
+			if(empty(@$key[$i]))
+			{
+				$key[$i] = "";
+			}
 			# code...
-			$sql=$sql.$arr[$i]."=".$key[$i];
+			if($i==15)
+			{
+			$sql=$sql.$arr[$i]."='".$key[$i]."'";
+			break; 	
+			}
+			$sql=$sql.$arr[$i]."='".$key[$i]."',";
 		}
-		echo $sql."()";	
+		$sql=$sql."WHERE accessid='".$key[0]."'";
+		//echo $sql;
+		mysqli_query($conn,$sql);
+		if(!empty(mysqli_error($conn)))	
+		{
+			echo mysqli_error($conn);
+			break;
+			$errorcheck=true;
+		}
+
+	}
+	if(!$errorcheck)
+	{
+		echo "Updation complete";
 	}
 }
+elseif ($type == "fileupd") {
+	# code...
+
+
+$sql = "UPDATE books SET ";
+
+
+require 'vendor/autoload.php';
+
+$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+$files=$_FILES['fileupload'];
+$tmp_name=$files['tmp_name'];
+$name=$files['name'];
+$destination=$name;
+$spreadsheet = $reader->load($tmp_name);
+
+$dataArray = $spreadsheet->getActiveSheet()
+    ->rangeToArray(	
+        'A1:Z20000',     // The workshet range that we want to retrieve
+        NULL,        // Value that should be returned for empty cells
+        TRUE,        // Should formulas be calculated (the equivalent of getCalculatedValue() for each cell)
+        TRUE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)
+        TRUE         // Should the array be indexed by cell row and cell column
+    ); // this fetches values of the sheet and stores it in an arrya dataArray.
+$i=2;
+$table="";
+while(!empty(checkpost($dataArray[$i]['A']))) //runs loop until encounters any empty accessionid cell 
+{
+		
+	$sql=$sql.'accessid="'.$dataArray[$i]["A"].'",author=
+	"'.$dataArray[$i]["B"].'",title="'.$dataArray[$i]['C'].'",volume="'.$dataArray[$i]['D'].'",publisher="'.$dataArray[$i]['E'].'",yop="'.$dataArray[$i]['F'].'",pages="'.$dataArray[$i]['G'].'",source="'.$dataArray[$i]['H'].'",classno="'.$dataArray[$i]['I'].'",bookno="'.$dataArray[$i]['J'].'",cost="'.$dataArray[$i]['K'].'",billno="'.$dataArray[$i]['L'].'",withdrawn="'.$dataArray[$i]['M'].'",entrydate="'.$dataArray[$i]['N'].'",DDCNO="'.$dataArray[$i]['O'].'",remarks="'.$dataArray[$i]['P'].'" WHERE accessid="'.$dataArray[$i]["A"].'"';
+
+	mysqli_query($conn,$sql);
+	if(!empty(mysqli_error($conn)))
+	{
+		echo '<script>alert("'."Error Occurred".'");</script>';
+		echo mysqli_error($conn);
+		$errorcheck=true;
+		break;
+	}
+	$table=$table."<tr>
+
+	<td>".$dataArray[$i]['A']."</td>
+
+	<td>".$dataArray[$i]['B']."</td>
+
+	<td>".$dataArray[$i]['C']."</td>
+
+	<td>".$dataArray[$i]['D']."</td>
+
+	<td>".$dataArray[$i]['E']."</td>
+
+	<td>".$dataArray[$i]['F']."</td>
+
+	<td>".$dataArray[$i]['G']."</td>
+
+	<td>".$dataArray[$i]['H']."</td>
+
+	<td>".$dataArray[$i]['I']."</td>
+
+	<td>".$dataArray[$i]['J']."</td>
+
+	<td>".$dataArray[$i]['K']."</td>
+
+	<td>".$dataArray[$i]['L']."</td>
+
+	<td>".$dataArray[$i]['M']."</td>
+
+	<td>".$dataArray[$i]['N']."</td>
+
+	<td>".$dataArray[$i]['O']."</td>
+
+	<td>".$dataArray[$i]['P']."</td>
+
+</tr>";
+	$i+=1;
+	$sql = "UPDATE books SET ";
+}
+if(!$errorcheck)
+{
+	echo $table;
+	echo '<script>alert("Updation successfully completed");</script>';
+}
+} 
+
 else
 {
 
