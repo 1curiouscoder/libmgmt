@@ -1,4 +1,41 @@
 							
+function returnbook()
+{
+  $(".return").click(function(){
+    var id = $(this).attr("id");
+    $("tr#"+id).css("background-color","white");
+    $("td[placeholder = "+id+"]").remove();
+    var da = new Date();
+    var ad = da.getFullYear() +"-"+ da.getMonth()+"-"+ da.getDate();
+    $("tr#"+id).append("<td>"+ad+"</td>");
+    var $a = $("tr#"+id).clone();
+    $("#tbbody4").prepend($a);
+    tableload("#dtBasicExample4");
+    $.post("../access.php",{"type":"remove","data":id,"date":ad},function(data){
+      //tableload("#dtBasicExample5");
+      alert(data);
+      $("tr#"+id).remove();
+    });
+      
+      
+  });
+}
+
+function tableload(data)
+{
+     if ( $.fn.dataTable.isDataTable( data ) ) 
+     {
+      
+     }
+    else
+    {
+      $(data).DataTable({
+        "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+      });
+      $('.dataTables_length').addClass('bs-select');
+    }
+}
+
 function check()
 	{
 							$("input.childdel").click(function()
@@ -121,7 +158,8 @@ function check()
                   });
 
       $("#upd").click(function(){
-      	$("#opupd").empty();
+        
+        
       	var upddata = new Array();
       	$('input.childupd').each(function(){
       		console.log("in");
@@ -131,32 +169,32 @@ function check()
       	  }
 
         });
-        
+       
          if(upddata.length>0)
          {		
          		$("li#tabdata>a").click();
                	$("li#tabupdate>a").click();
                	$("#parentopupd").css("visibility","");
                	$("#parentopupd2").css("visibility","hidden");
-
+                 $("#opupd").empty();
+                 $("#btn1").remove();
          		$.post("../update.php",{"data":upddata},function(data){
-         			
-         			$("#parentopupd").empty();
          			$("#opupd").append(data);
-         			console.log("visited");
+               console.log("visited");
+               
          			});
-               	
-               	$("#parentopupd").append("<button class='btn btn-primary' id='btn1' type='submit'>Update</button>");
+               $("#parentopupd").append("<button class='btn btn-primary' id='btn1' type='submit'>Update</button>"); 
+              
          }
          $("#updchk").prop("checked",false);
       	 $("#delchk").prop("checked",false);
       	 $(".childdel").prop('checked',false);
       	 $(".childupd").prop('checked',false);
       	 $("#srchres").empty();
-      	
-
+         console.log("visited2");
+        
       	 $("#btn1").click(function(){
-      	 	
+      	console.log("btn");
       		var dat = new Array();
       		var c=0;
       		var d=0;
@@ -173,7 +211,7 @@ function check()
       		dat[c].push($(this).val());
       		d+=1;
       		});
-      		alert(dat[1]);
+      		
       	//alert(final);
       	
 		      	$.post("../update.php",{"type":"update","data":dat},function(data){
@@ -183,11 +221,50 @@ function check()
       		});
 
      });
-       $("#del").click(function(){
-      	$("http://localhost/librarymgmt/html/dashboard.html#delete").tab("show");
-      });
 
-     }
+     //code for deleting data from database using search results
+       $("#del").unbind().click(function(e){
+        
+        $("#opdel").empty();
+        console.log(1);
+      	var deldata = new Array();
+      	$('input.childdel').each(function(){
+      		console.log("in");
+          if($(this).prop("checked")==true)
+          {
+          deldata.push($(this).val());     
+      	  }
+
+        });
+       
+         if(deldata.length>0)
+         {		
+         		$("li#tabdata>a").click();
+               	$("li#tabdelete>a").click();
+               	$("#parentopdel").css("visibility","");
+                
+                 $("#delbtn").remove();
+         		$.post("../delete.php",{"type":"delete","data":deldata},function(data){
+         			$("#opdel").append(data);
+               
+               });
+               $("#parentopdel").append("<button type ='submit' class='btn btn-danger' id='delbtn'>Confirm delete</button>");
+         }
+         //e.stopPropagation();
+         $("#delbtn").click(function(){
+           var del = new Array();
+           $("td.deldata").each(function(){
+             del.push($(this).text());
+           });
+           alert(del);
+           $.post("../delete.php",{"type":"confirmdel","data":del},function(data){
+            alert(data);
+           });
+         });
+    });
+    return false;
+  }
+     
 
 
 // code for uploading sheet for updating data
@@ -221,6 +298,7 @@ function check()
           $("#dtBasicExample3").css("visibility","");
           $("#tbbody2").append(data);
           tableload("#dtBasicExample3");
+          
          }
           
       });
@@ -232,6 +310,43 @@ function check()
   });
   
 
-          });                           
+          });            
 
-  
+// code for access record tab
+$(document).ready(function(){
+  tableload("dtBasicExample4");
+  $.post("../access.php",{"type":"true"},function(data){
+    
+    $("#tbbody3").append(data);
+    tableload("#dtBasicExample4");
+    returnbook();
+   
+    
+    $("#accnbtn").click(function(){
+      var d = new Array();
+      $(".accessdata").each(function(){
+        d.push($(this).val());
+      });
+      console.log(d);
+      $.post("../access.php",{"type":"addrecord","data":d},function(data){
+        
+        $("#tbbody3").prepend(data);
+        //tableload("#dtBasicExample5");
+       returnbook();
+        });
+    });
+});
+});
+
+$(document).ready(function(){
+ 
+$.post("../access.php",{"type":"false"},function(data){
+$("#tbbody4").append(data);
+tableload("#dtBasicExample5");
+});
+
+});
+
+$(document).ready(function(){
+
+});

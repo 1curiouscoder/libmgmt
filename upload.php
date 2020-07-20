@@ -1,6 +1,6 @@
 <?php
 require_once "connect.php";
-require_once "functions.php";
+require "functions.php";
 //print_r($_FILES);	//Check all $_FILES variables
 
 				

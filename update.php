@@ -140,7 +140,7 @@ else
 {
 
 $sql = "SELECT * FROM books WHERE accessid=";
-echo $sql;
+//echo $sql;
 foreach ($_POST['data'] as $key) {
 	# code...
 $res = mysqli_query($conn,$sql."'".$key."'");
