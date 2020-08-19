@@ -69,6 +69,24 @@ $row = mysqli_fetch_assoc($res);
 			<td >
 			".$row['remarks']."
 			</td>
+			<td >
+			".$row['almirah']."
+			</td>
+			<td >
+			".$row['registerpage']."
+			</td>
+			<td >
+			".$row['subject']."
+			</td>
+			<td >
+			".$row['type']."
+			</td>
+			<td >
+			".$row['lang']."
+			</td>
+			<td >
+			".$row['tag']."
+			</td>
 
 		</tr>
 			

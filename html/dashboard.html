@@ -20,6 +20,11 @@
 
 <script>
 
+    $(document).ready(function(){
+      
+      tables();
+    });
+
     $(document).ready(function tab(){ 
         $("#myTab a").click(function(e){
             e.preventDefault();
@@ -38,8 +43,8 @@
  $(document).ready(function(){
   $.ajax({url: "../traverse.php", success: function(result){
   $("#div2").append(result);
-    tableload("#dtBasicExample1");
     
+  tableload("#dtBasicExample1");    
 }});
 
       });
@@ -48,14 +53,15 @@ $(document).ready(function(){
     $("a.method").click(function(){
     var method = $(this).text();
     if(method == "Manual"){
-        $("div.add").html('   <button class="btn btn-secondary dropdown-toggle inc" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insertion At                </button>             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">                            <a class="dropdown-item At" href="#" id ="Start" value="Start">Start</a>                                     <a class="dropdown-item At" href="#"  id="End" value="End">End</a>                                          <a class="dropdown-item At" href="#" id="Between" value="import">Between</a>                                          </div>');
+        $("#dropdownMenuButton").text("Manual");
+        $("div.add").html('   <button class="btn btn-secondary dropdown-toggle inc" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insertion At                </button>             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">                            <a class="dropdown-item At" href="#" id ="Start" value="Start">Start</a>                                     <a class="dropdown-item At" href="#"  id="End" value="End">End</a>                                          <a class="dropdown-item At" href="#" id="Random" value="import">Random</a>                                          </div>');
           $("div.form").empty();
-        }
+        
 
   
     $("#Start").click(function(){
-        $("div.form").html('<form class="form-group">      <label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small>        <label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author">         <label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title">         <label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume">         <label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher">         <label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop">         <label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages">         <label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc">         <label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno">         <label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno">      <label for="cost">Cost</label>    <input  type="text" class="prepend form-control" id="cost">         <label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno">         <label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd">         <label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr">        <label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc">         <label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks">    <button type="submit" id="inc1" class="btn btn-primary">Submit</button></form>');
-
+        $("div.form").html('<form class="form-group" style="padding:2em">      <label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small>        <label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author">         <label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title">         <label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume">         <label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher">         <label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop">         <label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages">         <label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc">         <label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno">         <label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno">      <label for="cost">Cost</label>   <input  type="text" class="prepend form-control" id="cost">         <label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno">         <label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd">         <label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr">        <label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc">         <label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks">  <label for="almirah">Almirah</label>  <input  type="text" class="prepend form-control" id="almirah">  <label for="registerpage">Register page</label>  <input type="text" class="prepend form-control" id="registerpage"> <label for="subject">Subject</label>  <input  type="text" class="prepend form-control" id="subject"> <label for="type">Type</label>  <input  type="text" class="prepend form-control" id="type"> <label for="language">Language</label>  <input  type="text" class="prepend form-control" id="language"> <label for="tag">Tag</label>  <input  type="text" class="prepend form-control" id="tag">  <button id="inc1" class="btn btn-primary" style="margin-top:15px";>Submit</button></form>');
+        $(".inc").text("Start");
   
         
 
@@ -67,7 +73,7 @@ $(document).ready(function(){
           if(d==0)
           {
             formdata[d] = $(this).attr("placeholder"); 
-          }
+          } 
           else
               {
                     formdata[d] = $(this).val(); 
@@ -96,8 +102,8 @@ $(document).ready(function(){
 
 
        $("a#End").click(function(){
-              $("div.form").html('<form class="form-group">      <label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small>        <label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author">         <label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title">         <label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume">         <label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher">         <label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop">         <label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages">         <label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc">         <label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno">         <label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno">      <label for="cost">Cost</label>    <input  type="text" class="prepend form-control" id="cost">         <label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno">         <label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd">         <label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr">        <label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc">         <label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks">    <button type="submit" id="inc2" class="btn btn-primary">Submit</button></form>');
-
+              $("div.form").html('<form class="form-group">      <label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small>        <label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author">         <label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title">         <label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume">         <label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher">         <label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop">         <label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages">         <label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc">         <label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno">         <label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno">      <label for="cost">Cost</label>    <input  type="text" class="prepend form-control" id="cost">         <label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno">         <label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd">         <label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr">        <label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc">         <label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks">  <label for="almirah">Almirah</label>  <input  type="text" class="prepend form-control" id="almirah">  <label for="registerpage">Register page</label>  <input type="text" class="prepend form-control" id="registerpage"> <label for="subject">Subject</label>  <input  type="text" class="prepend form-control" id="subject"> <label for="type">Type</label>  <input  type="text" class="prepend form-control" id="type"> <label for="language">Language</label>  <input  type="text" class="prepend form-control" id="language"> <label for="tag">Tag</label>  <input  type="text" class="prepend form-control" id="tag"> <button type="submit" id="inc2" class="btn btn-primary">Submit</button></form>');
+              $(".inc").text("End");
 
 
         $(document).ready(function(){
@@ -115,7 +121,7 @@ $(document).ready(function(){
     $("#inc2").click(function()// DATABASE INSERTION CODE
       {
         var d = 0;           
-        var formdata = new Array(16);
+        var formdata = new Array(22);
         $("input.prepend").each(function(){
           if(d==0)
           {
@@ -142,21 +148,164 @@ $(document).ready(function(){
             });   
          });
 
-    $("a#Between").click(function(){
-                $("div.form").html('<div class="form-group"> <label for="startAccn">Starting accession no.</label>    <input type="text" class="form-control" id="startAccn" aria-describedby="emailHelp" placeholder=""></div><form class="form-group">      <label for="Accn" id="label">Accession no.</label>    <input  type="text" class="prepend form-control" id="Accn" aria-describedby="emailHelp" placeholder="1" readonly=true>    <small id="emailHelp" class="form-text text-muted"></small>        <label for="author">Author</label>    <input  type="text" class="prepend form-control" id="author">         <label for="title">Title</label>    <input  type="text" class="prepend form-control" id="title">         <label for="Volume">Volume</label>    <input  type="text" class="prepend form-control" id="Volume">         <label for="publisher">Publisher</label>    <input  type="text" class="prepend form-control" id="publisher">         <label for="yop">year of Pub.</label>    <input  type="text" class="prepend form-control" id="yop">         <label for="pages">Pages</label>    <input  type="text" class="prepend form-control" id="pages">         <label for="sourc">Source</label>    <input  type="text" class="prepend form-control" id="sourc">         <label for="clsno">Class No.</label>    <input  type="text" class="prepend form-control" id="clsno">         <label for="bookno">Book no.</label>    <input  type="text" class="prepend form-control" id="bookno">      <label for="cost">Cost</label>    <input  type="text" class="prepend form-control" id="cost">         <label for="billno">Bill no.</label>    <input  type="text" class="prepend form-control" id="billno">         <label for="withd">Withdrawn date</label>    <input  type="date" class="prepend form-control" id="withd">         <label for="entr">Entry date</label>    <input  type="date" class="prepend form-control" id="entr">        <label for="ddc">DDC no.</label>    <input  type="text" class="prepend form-control" id="ddc">         <label for="remarks">Remarks</label>    <input  type="text" class="prepend form-control" id="remarks">    <button type="submit" id="inc3" class="btn btn-primary">Submit</button></form>');
-
-
-
-
-                 $("#label").html("Ending accession no.");  
-                $("#Accn").attr({'placeholder':null,'readonly':false,'id':"endAccn"});
-               
+    $("a#Random").click(function(){
+      var htmldata = `<div class="card">
+      <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Multiple data insertion</h3>
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <div><a id="add" class="btn float-right" value="add row"><h2>+</h2></a></div>
+          <table class="table table-bordered table-responsive table-striped text-center" id="inctable">
+            <thead>
+              <tr>
+                <th class="text-center">Accession no.</th>
+                <th class="text-center">Author</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Publisher</th>
+                <th class="text-center">Year of Pub.</th>
+                <th class="text-center">Pages</th>
+                <th class="text-center">Source</th>
+                <th class="text-center">Class no.</th>
+                <th class="text-center">Book no.</th>
+                <th class="text-center">Cost</th>
+                <th class="text-center">Bill no.</th>
+                <th class="text-center">Withdrawn date</th>
+                <th class="text-center">Entry date</th>
+                <th class="text-center">DDC No.</th>
+                <th class="text-center">Remarks</th>     
+                <th class="text-center">Almirah</th>
+                <th class="text-center">Register pg.</th>
+                <th class="text-center">Subject</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Language</th>
+                <th class="text-center">Tag</th> 
+                <th class="text-center">Remove</th>  
                 
-               
+              </tr>
+            </thead>
+            <tbody id="udata">
+              <tr>
+                <td type="date" class="pt-3-half muldata " contenteditable="true">Accessionid</td>
+                <td class="pt-3-half muldata " contenteditable="true">Author</td>
+                <td class="pt-3-half muldata " contenteditable="true">Title</td>
+                <td class="pt-3-half muldata " contenteditable="true">Volume</td>
+                <td class="pt-3-half muldata " contenteditable="true">Publisher</td>
+                <td class="pt-3-half muldata " contenteditable="true">Year of pub</td>
+                <td class="pt-3-half muldata " contenteditable="true">Pages</td>
+                <td class="pt-3-half muldata " contenteditable="true">Source</td>
+                <td class="pt-3-half muldata " contenteditable="true">Classno</td>
+                <td class="pt-3-half muldata " contenteditable="true">Bookno</td>
+                <td class="pt-3-half muldata " contenteditable="true">Cost</td>
+                <td class="pt-3-half muldata " contenteditable="true">Billno</td>
+                <td class="pt-3-half  " contenteditable="true"><input type="date" class="muldata"></td>
+                <td class="pt-3-half  " contenteditable="true"><input type="date" class="muldata"></td>
+                <td class="pt-3-half muldata " contenteditable="true">DDC no</td>
+                <td class="pt-3-half muldata " contenteditable="true">Remarks</td>
+                <td class="pt-3-half muldata " contenteditable="true">Almirah</td>
+                <td class="pt-3-half muldata " contenteditable="true">Registerpg</td>
+                <td class="pt-3-half muldata " contenteditable="true">Subject</td>
+                <td class="pt-3-half muldata " contenteditable="true">Type</td>
+                <td class="pt-3-half muldata " contenteditable="true">Language</td>
+                <td class="pt-3-half muldata " contenteditable="true">tag</td>
+                <td>
+                  <span class="table-remove"><button type="button"
+                      class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>  <button type="submit" id="inc3" class="btn btn-primary">Submit</button>`;
+                $("div.form").html(htmldata);
+                $(".inc").text("Random");
+                
+
+function del()
+{
+  $(".table-remove").click(function(){
+$(this).parent().parent().empty();
+});
+}
+
+del();
+var data = `<tr>
+                <td class='pt-3-half muldata' contenteditable='true'>Accessionid</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Author</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Title</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Volume</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Publisher</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Yearofpubl.</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Pages</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Source</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Classno</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Bookno</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Cost</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Billno</td>
+                <td class="pt-3-half  " contenteditable="true"><input type="date" class="muldata"></td>
+                <td class="pt-3-half  " contenteditable="true"><input type="date" class="muldata"></td>
+                <td class='pt-3-half muldata' contenteditable='true'>DDCno</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Remarks</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Almirah</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Registepage</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Subject</td>
+                <td class="pt-3-half muldata " contenteditable="true">Type</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Language</td>
+                <td class='pt-3-half muldata' contenteditable='true'>Tag</td>
+                <td>
+                  <span class='table-remove'><button type='button' class='btn btn-danger btn-rounded btn-sm my-0'>Remove</button></span>
+                </td>
+                </tr>`;
+
+$("#inc3").click(function()
+  {
+              var counter = 0;
+              var muldat = new Array();
+              var counter2 =0;
+              muldat[0] = new Array(22);
+                  $(".muldata").each(function(){
+                    if($(this).text() != '' || $(this).val() != '')
+                  {
+                    if(counter == 22)
+                    {
+                      counter2=counter2+1;
+                      muldat[counter2] = new Array(22);
+                      counter=0;
+                      muldat[counter2][counter]=$(this).text();
+                    }
+                    else if(counter == 12 || counter==13)
+                    {
+                      muldat[counter2][counter]=$(this).val();  
+                    }
+                    else
+                    {
+                    muldat[counter2][counter]=$(this).text();
+                    }  
+                  }
+                  counter = counter + 1; 
+                  });
+                  $.post(
+                  "../query.php",
+    {"query" : "insert","inctype" : "Random","data" :muldat},
+        function(data) {
+         //$("#Accn").attr("placeholder",data);
+                    console.log(data);
+                    console.log(muldat);
+                  }
+               ); 
+
+                  
+  });         
+  $("#add").click(function()
+                  {
+                  $('#udata').append(data);
+                  del();
+                  });      
          });
-             
+        }         
                         if(method == "Importing file")              
                           { 
+                            $("#dropdownMenuButton").text("Importing file");
                            $("div.add").empty();                
                            $("div.form").html('<form class="md-form"  method="post" enctype="multipart/form-data" id="frmUpload">                                                                 <div class="input-group mb-3">  <div class="input-group-prepend">    <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon03">Upload</button>  </div>  <div class="custom-file">    <input type="file" class="custom-file-input" id="inputFile" aria-describedby="inputGroupFileAddon03">    <label class="custom-file-label" for="inputGroupFile03" id="cfile">Choose file</label>  </div></div>                                                                                             </form>');
 //code to upload file to server
@@ -176,7 +325,7 @@ $(document).ready(function(){
     } //Image validation end
     else {
       //formdata object to send file upload data
-
+      var acc = $("#acc").val();
       var formData = new FormData();
       formData.append('fileupload',$( '#inputFile' )[0].files[0], file_name);
       $.ajax({
@@ -191,7 +340,7 @@ $(document).ready(function(){
           tableload("#dtBasicExample2");
          }
           
-      });
+      },"json");
 
     }
 
@@ -217,8 +366,9 @@ $("#srchdata").attr("placeholder",val);
 $("button#srchmthd").text(val);
 $("button#filter").css("visibility","hidden");
 $("div#childfilter").css("visibility","hidden");
-$("#srchfrm input").css("visibility","hidden");
-if(val != "Accession Id") 
+$("#srchtable").css("visibility","hidden");
+$("#srchfrm").css("visibility","hidden");
+if(1) 
 // displays options when user selects accession id from dropdown
   {
   $("button#filter").css("visibility","");
@@ -232,11 +382,7 @@ if(val != "Accession Id")
     $("#srchdata").attr("placeholder",val);
   }
   }
-else 
-{
-  $("button#filter").css("visibility","hidden");
-  $("#btnchildfilter").css("visibility","hidden");
-}      
+     
         });
     });
 
@@ -251,20 +397,20 @@ $("button#filter").click(function()
     if($("div#childfilter").css("visibility") != "hidden")
     {     
       $("div#childfilter").css("visibility","hidden");
-      $("button#btnchildfilter").css("visibility","hidden"); 
+      $(".btnchildfilter").css("visibility","hidden"); 
       $("#srchdata").attr("placeholder",$("#srchdata").attr("placeholder").replace("(Starting)",""));
     }
     else
     {
       $("div#childfilter").css("visibility","");
-      $("button#btnchildfilter").css("visibility","");
+      $(".btnchildfilter").css("visibility","");
       //alert($("button#srchmthd").attr('id')+"childfilter");
       var chk = $('button#srchmthd').text().toLowerCase().replace(' ', '');
       chk = chk.replace(" ","");
       chk = chk.replace(".","");
-      if(chk != 'withdrawndate' && chk != 'entrydate' && chk != 'yearofpublication')
+      if(chk == 'publisher' || chk == 'author' || chk == 'remarks' || chk == 'title' || chk == 'subject' || chk == 'type' || chk == 'language' || chk == 'tag')
       {
-        $("[value="+chk+"]").css("visibility","hidden");
+        $(".btnchildfilter[value="+chk+"]").css("visibility","hidden");
       }   
       }
   });
@@ -272,15 +418,17 @@ $("button#filter").click(function()
 });
 
 $(document).ready(function(){
-  $("button#btnchildfilter").click(function(){
+  $(".btnchildfilter").click(function(){
         
         $("#srchfrm").css("visibility","");
         var obj = "#srchfrm"+ $(this).attr("value");
-       
+       console.log(obj);
         if($(obj).css("visibility") == "hidden")
         {
           $(obj).css("visibility","");
-if($(this).attr("value").toLowerCase().split(" ").join("") == $("#srchmthd").text().toLowerCase().split(" ").join(""))
+          console.log($(this).text().toLowerCase());
+          console.log($("#srchmthd").text().toLowerCase());
+if($(this).text().toLowerCase().replace(" ","") == $("#srchmthd").text().toLowerCase().replace(" ",""))
       {
         var d =$("#srchdata").attr("placeholder")+"(Starting)";
         var e =$(obj).attr("placeholder")+"(Ending)";
@@ -291,9 +439,11 @@ if($(this).attr("value").toLowerCase().split(" ").join("") == $("#srchmthd").tex
         else
         {
           $(obj).css("visibility","hidden");
+          if($(this).text().replace("#srchfrm","") == $("#srchmthd").text().replace("(Starting)",""))
+          {
           $("#srchdata").attr("placeholder",$("#srchdata").attr("placeholder").replace("(Starting)",""));
-        $(obj).attr("placeholder",$(obj).attr("placeholder").replace("(Ending)",""));
-        
+          $(obj).attr("placeholder",$(obj).attr("placeholder").replace("(Ending)",""));
+          }
         }
     });
 });
@@ -301,42 +451,63 @@ if($(this).attr("value").toLowerCase().split(" ").join("") == $("#srchmthd").tex
 $(document).ready(function(){
     $("#srch").click(function(){
         var c = 0;           
-        var frmdata = new Array(8);
+        var frmdata = new Array(20);
+        $("#dtBasicExample").DataTable().destroy();
         $("#srchres").empty();
         $("#srchfrm").children('input').each(function(){
         if($(this).css("visibility") != "hidden")
-        {
-          
+        {          
           frmdata[c] = $(this).val();
-             
-         c=c+1;
         }
-        else{c=c+1;}
+        c=c+1;
         
         //alert(c);
         
         });
 
               var srch =   $("#srchdata").val(); 
-        
-              $("#srchres").empty();
-              
               var srchtype = $("#srchdata").attr('placeholder'); 
-                                                     
+               //alert(frmdata);                       
                $.post(
                   "../query.php",
                   {"query" : "search","srchtype" : srchtype,"srchdata":srch,"data" :frmdata},
+                 
                   function(data) {
+                    if(data == 1 )
+                    {
+                      $("#srchtable").css("visibility","hidden");
+                      alert('no results');
+                    }
+                    else if(data==2)
+                    {
+                      
+                      $("#srchtable").css("visibility","hidden");
+                      alert('fields are empty');
+                    }
+                    else
+                    {
                      //$("#Accn").attr("placeholder",data);
                      $("#srchtable").css("visibility","");
                      $("#srchres").append(data);
-                      tableload("#dtBasicExample"); 
+                     
+                      tableload("#dtBasicExample");
                       check();                      
-
+                    }
                   }
                );
 
-
+              $("#customSwitch").click(function(){
+                if($(this).prop("checked")==true)
+                {
+                  $("#dtBasicExample").DataTable().destroy(); 
+                  
+                }
+                else
+                {
+                  $("#dtBasicExample").DataTable().destroy();
+                  tableupdate("#dtBasicExample");
+                }
+              });
 
             
             }); 
@@ -345,10 +516,10 @@ $(document).ready(function(){
 });
 
 
-
           </script>
 </head>
 <body >
+  <div id="acc" style="visibility:hidden;"></div>
 <div class="bs-example ">
     <ul id="myTab" class="nav nav-pills" >
         <li class="nav-item">
@@ -372,8 +543,8 @@ $(document).ready(function(){
         <div class="tab-pane fade" id="search">
          
             <h4 class="mt-2">Search</h4>
-            <div class="input-group mb-3 float-center" > 
-  <input type="text" class="form-control" placeholder="Accession Id" aria-label="Recipient's username" aria-describedby="basic-addon2" id="srchdata"  style="width:600px">
+            <div class="input-group mb-3 float-center container-fluid" > 
+  <input type="text" class="form-control" placeholder="Accession id" aria-label="Recipient's username" aria-describedby="basic-addon2" id="srchdata"  style="width:600px">
   <div class="input-group-append " >
     <div class="dropdown"> 
                 <button class="btn btn-primary dropdown-toggle" type="button" id="srchmthd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -381,7 +552,7 @@ $(document).ready(function(){
                 </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                      <a class="dropdown-item method2" href="#" id="dropaccnid" >Accession Id</a>
+                      <a class="dropdown-item method2" href="#" id="dropaccnid" >Accession id</a>
                       <a class="dropdown-item method2" href="#" id="dropauthor" >Author</a>
                       <a class="dropdown-item method2" href="#" id="droptitle" >Title</a>
                       <a class="dropdown-item method2" href="#" id="dropvol" >Volume</a>
@@ -392,11 +563,18 @@ $(document).ready(function(){
                       <a class="dropdown-item method2" href="#" id="dropclsno" >Class No.</a>
                       <a class="dropdown-item method2" href="#" id="dropbkno" >Book No.</a>
                       <a class="dropdown-item method2" href="#" id="dropcost" >Cost</a>
-                      <a class="dropdown-item method2" href="#" id="dropbill" >Bill No.</a>
+                      <a class="dropdown-item method2" href="#" id="dropbillno" >Bill No.</a>
                       <a class="dropdown-item method2" href="#" id="dropwidtdt" >Withdrawn date</a>
                       <a class="dropdown-item method2" href="#" id="dropentrdt" >Entry date</a>
                       <a class="dropdown-item method2" href="#" id="dropdcc" >DCC No.</a>
                       <a class="dropdown-item method2" href="#" id="dropremrk" >Remarks</a>
+                      <a class="dropdown-item method2" href="#" id="dropalmrh" >Almirah</a>
+                      <a class="dropdown-item method2" href="#" id="dropregpage" >Register Page</a>
+                      <a class="dropdown-item method2" href="#" id="dropsubject" >Subject</a>
+                      <a class="dropdown-item method2" href="#" id="droptype" >Type</a>
+                      <a class="dropdown-item method2" href="#" id="droplanguage" >Language</a>
+                      <a class="dropdown-item method2" href="#" id="droptag" >Tag</a>
+
                     </div>
           
               <div class="float-right">
@@ -415,38 +593,72 @@ $(document).ready(function(){
   </div>
 
   <div id="childfilter" style="visibility:hidden;padding:2em">
-
-    <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="author">Author</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="title">Title</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="volume">Volume</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="publisher">Publisher</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="yearofpublication">Year of publication</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="cost">Cost</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="withdrawndate">Withdrawn date</button>
-        <button class="btn btn-outline-secondary " id="btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px "  value="entrydate">Entry date</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="accnid">Accession id</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="nfilter"  value="author">Author</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="nfilter"  value="title">Title</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="volume">Volume</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="nfilter"  value="publisher">Publisher</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="yearofpublication">Year of Publication</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="pages">Pages</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="clsno">Class No.</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="bokno">Book No.</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="cost">Cost</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="billno">Bill No.</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="withdrawndate">Withdrawn date</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="entrydate">Entry date</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="dcc" >DCC No.</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="almrh" >Almirah</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="regpage" >Register Page</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="subject" >Subject</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="type" >Type</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="language" >Language</button>
+        <button class="btn btn-outline-secondary btnchildfilter"   type="button" style="visibility:hidden;border-radius: 10px;margin:5px " placeholder="filter"  value="tag" >Tag</button>
         
   
       </div>
       <div class="container-fluid">
   <div class="row">   
   
-    <div id="srchfrm" class="form-group col-lg-1 col-md-1" style="visibility:hidden"> 
+    <div id="srchfrm" class="form-group col-lg-2 col-md-2" style="visibility:hidden"> 
 
            <h4>Filter values</h4>
+           <input type="text" class="form-control " id="srchfrmaccnid" placeholder="Accession id" style="visibility:hidden;margin:5px;">
           <input type="text" class="form-control " id="srchfrmauthor" placeholder="Author" style="visibility:hidden;margin:5px;">
           <input type="text" class="form-control " id="srchfrmtitle" placeholder="Title" style="visibility:hidden;margin:5px;">
           <input type="text" class="form-control" id="srchfrmvolume" placeholder="Volume" style="visibility:hidden;margin:5px">
           <input type="text" class="form-control" id="srchfrmpublisher" placeholder="Publisher" style="visibility:hidden;margin:5px">
-          <input type="number" class="form-control" id="srchfrmyearofpublication" placeholder="Year of publication" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmyearofpublication" placeholder="Year of Publication" style="visibility:hidden;margin:5px">
+
+          
+          <input type="number" class="form-control" id="srchfrmpages" placeholder="Pages" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmclsno" placeholder="Class no" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmbokno" placeholder="Book no" style="visibility:hidden;margin:5px">
           <input type="number" class="form-control" id="srchfrmcost" placeholder="Cost" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmbillno" placeholder="Bill no" style="visibility:hidden;margin:5px">
+
+          
           <input type="date" class="form-control" id="srchfrmwithdrawndate" placeholder="Withdrawn date" style="visibility:hidden;margin:5px">
           <input type="date" class="form-control" id="srchfrmentrydate" placeholder="Entry date" style="visibility:hidden;margin:5px">
+
+          <input type="number" class="form-control" id="srchfrmdcc" placeholder="DCC No" style="visibility:hidden;margin:5px">
+          <input type="text" class="form-control" id="srchfrmalmrh" placeholder="Almirah" style="visibility:hidden;margin:5px">
+          <input type="number" class="form-control" id="srchfrmregpage" placeholder="Register page" style="visibility:hidden;margin:5px">
           
+          <input type="text" class="form-control" id="srchfrmsubject" placeholder="Subject" style="visibility:hidden;margin:5px">
+          <input type="text" class="form-control" id="srchfrmtype" placeholder="Type" style="visibility:hidden;margin:5px">
+          <input type="text" class="form-control" id="srchfrmlanguage" placeholder="Language" style="visibility:hidden;margin:5px">
+          <input type="text" class="form-control" id="srchfrmtag" placeholder="Tag" style="visibility:hidden;margin:5px">
     </div>
 
-    <div id="srchtable" class="col-lg-11 col-md-11" style="visibility:hidden">
+    <div id="srchtable" class="col-lg-10 col-md-10" style="visibility:hidden">
       <h4>Search results</h4>&nbsp
        <div class="">
+        
+        <div class="custom-control custom-switch custom-switch-xl float-right">
+          <input type="checkbox" class="custom-control-input" id="customSwitch">
+          <label class="custom-control-label" for="customSwitch"><h6>Toggle Complete Table</h6></label>
+        </div>
+
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive"  cellspacing="0" width="100%">
                   <thead class="thead-dark">
                   <tr>
@@ -467,7 +679,15 @@ $(document).ready(function(){
                                 <th class="th-sm">Withdrawn date</th>
                                 <th class="th-sm">Entry date</th>
                                 <th class="th-sm">DDC No.</th>
-                                <th class="th-sm">Remarks</th>            
+                                <th class="th-sm">Remarks</th>
+                                <th class="th-sm" >Almirah</a>
+                                <th class="th-sm"  >Register Page</a>
+                                <th class="th-sm"  >Subject</a>
+                                <th class="th-sm" >Type</a>
+                                <th class="th-sm" >Language</a>
+                                <th class="th-sm" >Tag</a>
+            
+            
                     </tr>
                     </thead>
                                   <tbody id="srchres">          
@@ -526,7 +746,12 @@ $(document).ready(function(){
                                 <th class="th-sm">Entry date</th>
                                 <th class="th-sm">DDC No.</th>
                                 <th class="th-sm">Remarks</th>     
-                                                          
+                                <th class="th-sm">Almirah</th>
+                                <th class="th-sm">Register pg.</th>
+                                <th class="th-sm">Subject</th>
+                                <th class="th-sm">Type</th>
+                                <th class="th-sm">Language</th>  
+                                <th class="th-sm">Tag</th> 
                               </tr>
                       </thead>
                             <tbody id="div2">
@@ -549,13 +774,19 @@ $(document).ready(function(){
                                 <th>Withdrawn date</th>
                                 <th>Entry date</th>
                                 <th>DDC No.</th>
-                                <th>Remarks</th>     
-    </tr>
+                                <th>Remarks</th>  
+                                <th>Almirah</th>
+                                <th>Register pg.</th>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>Language</th>   
+                                <th>Tag</th> 
+    </tr> 
   </tfoot>
                     </table>
                 </div>
           </div>
-        <div class="tab-pane fade show " id="insert">
+        <div class="tab-pane fade show container-fluid" id="insert">
                 <h4 class="mt-2">Insert</h4>
                 &nbsp
             <div class="dropdown">
@@ -589,7 +820,13 @@ $(document).ready(function(){
                                 <th class="th-sm">Withdrawn date</th>
                                 <th class="th-sm">Entry date</th>
                                 <th class="th-sm">DDC No.</th>
-                                <th class="th-sm">Remarks</th>                                
+                                <th class="th-sm">Remarks</th> 
+                                <th class="th-sm">Almirah</th>
+                                <th class="th-sm">Register pg.</th>
+                                <th class="th-sm">Subject</th>
+                                <th class="th-sm">Type</th>
+                                <th class="th-sm">Language</th>  
+                                <th class="th-sm">Tag</th>                                
                               </tr>
                   </thead>                               
                                 <tbody id="tbbody">
@@ -626,7 +863,13 @@ $(document).ready(function(){
                                 <th class="th-sm">Withdrawn date</th>
                                 <th class="th-sm">Entry date</th>
                                 <th class="th-sm">DDC No.</th>
-                                <th class="th-sm">Remarks</th>                                
+                                <th class="th-sm">Remarks</th>   
+                                <th class="th-sm">Almirah</th>
+                                <th class="th-sm">Register pg.</th>
+                                <th class="th-sm">Subject</th>
+                                <th class="th-sm">Type</th>
+                                <th class="th-sm">Language</th>  
+                                <th class="th-sm">Tag</th>                              
                               </tr>
                   </thead>                               
                                 <tbody id="tbbody2">
@@ -636,7 +879,7 @@ $(document).ready(function(){
          
 
                </div> 
-              <div id="parentopupd" style="visibility: hidden;">
+              <div id="parentopupd"  style="visibility: hidden;">
                <table  class="table table-striped table-bordered " cellspacing="0" width="100%">
                   <thead>
                             <tr>
@@ -655,7 +898,13 @@ $(document).ready(function(){
                                 <th >Withdrawn date</th>
                                 <th >Entry date</th>
                                 <th >DDC No.</th>
-                                <th >Remarks</th>                                
+                                <th >Remarks</th>     
+                                <th>Almirah</th>
+                                <th>Register pg.</th>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>Language</th>  
+                                <th>Tag</th>                            
                               </tr>
                   </thead>                               
                                 <tbody id="opupd">
@@ -689,7 +938,13 @@ $(document).ready(function(){
                                  <th >Withdrawn date</th>
                                  <th >Entry date</th>
                                  <th >DDC No.</th>
-                                 <th >Remarks</th>                                
+                                 <th >Remarks</th>  
+                                 <th>Almirah</th>
+                                <th>Register pg.</th>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>Language</th>  
+                                <th>Tag</th>                                
                                </tr>
                    </thead>                               
                                  <tbody id="opdel">
@@ -700,6 +955,7 @@ $(document).ready(function(){
            
                </div>
           </div>
+
         </div>
 
         </div>
@@ -782,17 +1038,25 @@ $(document).ready(function(){
     {
          if ( $.fn.dataTable.isDataTable( data ) ) 
          {
-          
+
          }
         else
-        {
+        { 
           $(data).DataTable({
-            "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+            "pagingType": "full_numbers",destroy:true // "simple" option for 'Previous' and 'Next' buttons only
           });
           $('.dataTables_length').addClass('bs-select');
         }
     }
-
+    function tableupdate(data)
+    {   
+       
+          $(data).DataTable({
+            "pagingType": "full_numbers"// "simple" option for 'Previous' and 'Next' buttons only
+          });
+          $('.dataTables_length').addClass('bs-select');
+          
+    }
 
 
 

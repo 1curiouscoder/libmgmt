@@ -38,11 +38,11 @@ if(empty(mysqli_error($conn)))
             else {
                 echo "<tr id='".$row['id']."' style='background-color:red;'>
                 <td placeholder='".$row['id']."'><input type='submit' class='return' value='Return' id='".$row['id']."'></td>
-                <td>@".$row['accessid']."</td>
-                <td>".$row['name']."</td>
-                <td>".$row['bname']."</td>
-                <td>".$row['issuedate']."</td>
-                <td>".$row['returndate']."</td>
+                <td style='color:white;'>@".$row['accessid']."</td>
+                <td style='color:white;'>".$row['name']."</td>
+                <td style='color:white;'>".$row['bname']."</td>
+                <td style='color:white;'>".$row['issuedate']."</td>
+                <td style='color:white;'>".$row['returndate']."</td>
                 </tr>
                 ";
             }
@@ -95,12 +95,24 @@ else if($type == "addrecord")
         $data = $_POST['data'];
         $sql = "SELECT title FROM books WHERE accessid='".$data[0]."'";
         $res = mysqli_query($conn,$sql);
+        $errorcheck=false;
         $row = mysqli_fetch_assoc($res);
+        if(!empty($row['title']))
+        {
         $title = $row['title'];
         //var_dump($data);
         $sql = "INSERT INTO accessrec (accessid,name,bname,issuedate,returndate,active) VALUES('".$data[0]."','".$data[1]."','".$title."','".$data[2]."','".$data[3]."','true')";
         mysqli_query($conn,$sql);
-        if(!empty(mysqli_error($conn)))
+        }
+        else
+        {
+            $errorcheck = true;
+        }
+        if($errorcheck)
+        {
+            echo "error";
+        }
+        else if(!empty(mysqli_error($conn)))
         {
             echo mysqli_error($conn);
         }
@@ -153,9 +165,9 @@ else if($type == "addrecord")
             <td style='color:white;'>".$data[3]."</td>
             </tr>
             ";
+                }
         }
     }
-}
 else {
     # code...
     $data = $_POST['data'];

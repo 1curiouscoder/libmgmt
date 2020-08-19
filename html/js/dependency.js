@@ -1,9 +1,9 @@
 							
 function returnbook()
 {
-  $(".return").click(function(){
+  $(".return").unbind().click(function(){
     var id = $(this).attr("id");
-    $("tr#"+id).css("background-color","white");
+    $("tr#"+id).css("background-color","black");
     $("td[placeholder = "+id+"]").remove();
     var da = new Date();
     var ad = da.getFullYear() +"-"+ da.getMonth()+"-"+ da.getDate();
@@ -193,7 +193,7 @@ function check()
       	 $("#srchres").empty();
          console.log("visited2");
         
-      	 $("#btn1").click(function(){
+      	 $("#btn1").unbind().click(function(){
       	console.log("btn");
       		var dat = new Array();
       		var c=0;
@@ -201,7 +201,7 @@ function check()
       		dat[c]=[];
 
       		$(".updfrm1").each(function(){
-      			if(d==16)
+      			if(d==22)
       			{
       				c+=1;
       				d=0;
@@ -219,7 +219,6 @@ function check()
 		      		
 		      		});  																		
       		});
-
      });
 
      //code for deleting data from database using search results
@@ -256,7 +255,6 @@ function check()
            $("td.deldata").each(function(){
              del.push($(this).text());
            });
-           alert(del);
            $.post("../delete.php",{"type":"confirmdel","data":del},function(data){
             alert(data);
            });
@@ -329,10 +327,16 @@ $(document).ready(function(){
       });
       console.log(d);
       $.post("../access.php",{"type":"addrecord","data":d},function(data){
-        
+        if(data=="error")
+        {
+          alert("Book do not exist");
+        }
+        else
+        {
         $("#tbbody3").prepend(data);
         //tableload("#dtBasicExample5");
        returnbook();
+        }
         });
     });
 });
@@ -346,7 +350,7 @@ tableload("#dtBasicExample5");
 });
 
 });
-
-$(document).ready(function(){
-
-});
+function tables()
+{
+  
+}

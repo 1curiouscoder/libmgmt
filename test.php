@@ -11,7 +11,7 @@ else{
     echo "np";
 }
 var_dump($_POST["data"]);
-*/
+
 function getaccessid($data)
 {
 	if($data = "End")
@@ -22,5 +22,15 @@ function getaccessid($data)
 			return @$res['accessid'];
 		}
 }
-echo getaccessid("End");
+*/
+$sql1 = "SELECT accessid FROM books WHERE accessid BETWEEN 0 AND 10000000";
+$row = mysqli_query($conn,$sql1);
+$a ="";
+$i=0;
+while($res = mysqli_fetch_assoc($row))
+{
+	$a=$a.$res["accessid"].",";
+}
+print($a);
+print_r()
 ?>
