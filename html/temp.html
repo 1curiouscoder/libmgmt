@@ -87,10 +87,14 @@ $(document).ready(function(){
         var ind = document.cookie.split(",")[0];
         $.getJSON(filePath).done(function (data) {
 
-    alert(data[ind].quoteText);
+    //document.write(data[ind].quoteText + "<br>" + data[ind].quoteAuthor);
     });
       }
   </script>
-
+<div class="jumbotron row">
+  <h1 style="font-family: myFirstFont;" id="quote">asda</h1><br><br><br>asdad
+  
+  <p id="quoter" class="float-right" style="font-family: myFirstFont2;">ada</p>
+</div>
   </body>
 </html>

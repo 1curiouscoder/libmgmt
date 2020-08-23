@@ -36,6 +36,7 @@
   font-family: myFirstFont5;
   src: url("DancingScript.ttf");
 }
+
 </style>
 
 <script>
@@ -550,7 +551,14 @@ function quote()
     $.getJSON(filePath).done(function (data) {
     
      document.getElementById("quote").innerHTML = '"'+ data[rand].quoteText+'"';
-     document.getElementById("quoter").innerHTML = data[rand].quoteAuthor; 
+     if(data[rand].quoteAuthor!="")
+     {
+     document.getElementById("quoter").innerHTML = "~ "+data[rand].quoteAuthor; 
+     }
+     else
+     {
+      document.getElementById("quoter").innerHTML = "~ Unknown"; 
+     }
       });
       document.cookie = s;
       }
@@ -558,7 +566,14 @@ function quote()
         var ind = document.cookie.split(",")[0];
         $.getJSON(filePath).done(function (data) {
           document.getElementById("quote").innerHTML ='"'+ data[ind].quoteText+'"';
-          document.getElementById("quoter").innerHTML = data[ind].quoteAuthor;
+          if(data[ind].quoteAuthor!="")
+          {
+          document.getElementById("quoter").innerHTML = "~ "+data[ind].quoteAuthor; 
+          }
+          else
+          {
+            document.getElementById("quoter").innerHTML = "~ Unknown"; 
+          }
     });
       }
 
@@ -586,6 +601,7 @@ function quote()
           </script>
 </head>
 <body onload="quote()">
+
   <div id="acc" style="visibility:hidden;"></div>
 <div class="bs-example ">
     <ul id="myTab" class="nav nav-pills" >
@@ -1216,10 +1232,8 @@ function quote()
 
 
 </script>
-<footer style="background-color:cyan;">
-  <div class="footer-copyright text-center py-3" style="font-family:myFirstFont5;font-size: 1.5em;">© 2020 Copyright:Opensource software
-    <a href="#"></a>
-  </div>
-</footer>
+
 </body>
+
+
 </html>
