@@ -16,6 +16,26 @@
   .bs-example{
       margin: 20px;
     }
+@font-face {
+  font-family: myFirstFont;
+  src: url("RussoOne.ttf");
+}
+@font-face {
+  font-family: myFirstFont2;
+  src: url("Playfair.ttf");
+}
+@font-face {
+  font-family: myFirstFont3;
+  src: url("BebasNeue.ttf");
+}
+@font-face {
+  font-family: myFirstFont4;
+  src: url("Anton-Regular.ttf");
+}
+@font-face {
+  font-family: myFirstFont5;
+  src: url("DancingScript.ttf");
+}
 </style>
 
 <script>
@@ -88,6 +108,7 @@ $(document).ready(function(){
                   {"query" : "insert","inctype" : "Start","data" :formdata},
                   function(data) {
                      //$("#Accn").attr("placeholder",data);
+                     
                     alert(data);
                   }
                );           
@@ -515,10 +536,56 @@ $(document).ready(function(){
 
 });
 
+function quote()
+{
+  var dt = new Date();
+      var d = dt.getDate();
+      var filePath = "quotes.json";
+      if(document.cookie=="" || document.cookie.split(",")[1]!=d){
+      
+      var s = new Array();
+      var rand = Math.floor(Math.random()*5000);
+      s.push(rand);
+      s.push(d);
+    $.getJSON(filePath).done(function (data) {
+    
+     document.getElementById("quote").innerHTML = '"'+ data[rand].quoteText+'"';
+     document.getElementById("quoter").innerHTML = data[rand].quoteAuthor; 
+      });
+      document.cookie = s;
+      }
+      else{
+        var ind = document.cookie.split(",")[0];
+        $.getJSON(filePath).done(function (data) {
+          document.getElementById("quote").innerHTML ='"'+ data[ind].quoteText+'"';
+          document.getElementById("quoter").innerHTML = data[ind].quoteAuthor;
+    });
+      }
+
+  $(document).ready(function(){
+    $.post("../home.php",function(data)
+    {
+      var dat = data.split(",");
+      for(var i=1;i<=8;i++)
+      {
+        dat[i-1]= dat[i-1].replace("[","");
+        dat[i-1]= dat[i-1].replace("]","");
+        if(dat[i-1]!='')
+        {
+        $("#"+i).text(dat[i-1]);
+        }
+        else
+        {
+          $("#"+i).text(0);
+        }
+      }
+    });
+  });
+}
 
           </script>
 </head>
-<body >
+<body onload="quote()">
   <div id="acc" style="visibility:hidden;"></div>
 <div class="bs-example ">
     <ul id="myTab" class="nav nav-pills" >
@@ -538,7 +605,95 @@ $(document).ready(function(){
     <div class="tab-content">
         <div class="tab-pane fade show active" id="home">
             <h4 class="mt-2">Home</h4>
-            <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+            <div class="container-fluid">
+              <div class="jumbotron row">
+                    <h1 style="font-family: myFirstFont;!important" id="quote"></h1>
+                    <p id="quoter" class="float-right" style="font-family: myFirstFont2;"></p>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo2.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;">Total Books in database</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="1"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo5.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center> <h4 class="card-title" style="font-family: myFirstFont3;">English Books</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="2"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo6.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;" style="font-family: myFirstFont3;">Hindi Books</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" style="font-family: myFirstFont4;" id="3"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo4.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;">Textbooks</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;"  id="4"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo7.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;" >Story books</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="5"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center> <h4 class="card-title" style="font-family: myFirstFont3;" >Novels</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="6"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo3.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;" >Magazine</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="7"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom:2em;">
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="images/photo8.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <center><h4 class="card-title" style="font-family: myFirstFont3;" >Issued Books</h4>
+                      <p class="card-text"  style="size:20px; font-family: myFirstFont4;" id="8"></p></center>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
         </div>
         <div class="tab-pane fade" id="search">
          
@@ -1061,5 +1216,10 @@ $(document).ready(function(){
 
 
 </script>
+<footer style="background-color:cyan;">
+  <div class="footer-copyright text-center py-3" style="font-family:myFirstFont5;font-size: 1.5em;">© 2020 Copyright:Opensource software
+    <a href="#"></a>
+  </div>
+</footer>
 </body>
 </html>

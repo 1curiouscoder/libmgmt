@@ -23,7 +23,10 @@
 <script type="text/javascript" src="../mdbbootstrap/js/addons/datatables.min.js"></script>
 
     <style>
-
+@font-face {
+  font-family: myFirstFont;
+  src: url("RussoOne.ttf");
+}
       .pt-3-half {
 padding-top: 1.4rem;
 }
@@ -61,61 +64,33 @@ $(document).ready(function(){
 </script>
   </head>
   <body class="text-center">
- 
-    <div class="card">
-      <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Multiple data insertion</h3>
-      <div class="card-body">
-        <div id="table" class="table-editable">
-          <div><a id="add" class="btn float-right" value="add row"><h2>+</h2></a></div>
-          <table class="table table-bordered table-responsive-md table-striped text-center">
-            <thead>
-              <tr>
-                <th class="text-center">Accession no.</th>
-                <th class="text-center">Author</th>
-                <th class="text-center">Title</th>
-                <th class="text-center">Volume</th>
-                <th class="text-center">Publisher</th>
-                <th class="text-center">Year of Pub.</th>
-                <th class="text-center">Pages</th>
-                <th class="text-center">Source</th>
-                <th class="text-center">Class no.</th>
-                <th class="text-center">Book no.</th>
-                <th class="text-center">Cost</th>
-                <th class="text-center">Bill no.</th>
-                <th class="text-center">Withdrawn date</th>
-                <th class="text-center">Entry date</th>
-                <th class="text-center">DDC No.</th>
-                <th class="text-center">Remarks</th>     
-                <th class="text-center">Almirah</th>
-                <th class="text-center">Register pg.</th>
-                <th class="text-center">Subject</th>
-                <th class="text-center">Type</th>
-                <th class="text-center">Language</th>  
-                
-              </tr>
-            </thead>
-            <tbody id="data">
-              <tr>
-                <td class="pt-3-half" contenteditable="true">Aurelia Vega</td>
-                <td class="pt-3-half" contenteditable="true">30</td>
-                <td class="pt-3-half" contenteditable="true">Deepends</td>
-                <td class="pt-3-half" contenteditable="true">Spain</td>
-                <td class="pt-3-half" contenteditable="true">Madrid</td>
-                
-                <td>
-                  <span class="table-remove"><button type="button"
-                      class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="70"
-      aria-valuemin="0" aria-valuemax="100" style="width:8%">
-        70%
-      </div>
-    </div></body>
+<p style="font-family:myFirstFont ;">adasdasdada</p>
+    <script>
+      var dt = new Date();
+      var d = dt.getDate();
+      var filePath = "quotes.json";
+      if(document.cookie=="" || document.cookie.split(",")[1]!=d){
+      
+      var s = new Array();
+      var rand = Math.floor(Math.random()*5000);
+      s.push(rand);
+      s.push(d);
+      document.cookie = s;
+    $.getJSON(filePath).done(function (data) {
+    
+      alert(data[rand].quoteText);
+
+      });
+      
+      }
+      else{
+        var ind = document.cookie.split(",")[0];
+        $.getJSON(filePath).done(function (data) {
+
+    alert(data[ind].quoteText);
+    });
+      }
+  </script>
+
+  </body>
 </html>
